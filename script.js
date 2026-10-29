@@ -203,3 +203,11 @@ if (dialog && form) {
     }
   });
 }
+
+
+/* ---------------------------------------------------------
+   3. Current year in the footer (no need to update it every January)
+   --------------------------------------------------------- */
+document.querySelectorAll('[data-year]').forEach((element) => {
+  element.textContent = new Date().getFullYear();
+});

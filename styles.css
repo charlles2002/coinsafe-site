@@ -1195,3 +1195,103 @@ ol[role="list"] {
   padding: 0 var(--space-5) var(--space-5);
   color: var(--color-muted);
 }
+
+
+/* ---------------------------------------------------------
+   12. Footer
+   --------------------------------------------------------- */
+.site-footer {
+  padding-block: var(--space-7);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.9375rem;
+}
+
+.footer-inner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.footer-brand .logo img {
+  width: 32px;
+  height: 32px;
+}
+
+.footer-tagline {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+}
+
+.footer-links a {
+  display: inline-block;
+  padding-block: var(--space-1);
+  color: var(--color-text);
+  text-underline-offset: 3px;
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+.footer-bottom {
+  display: grid;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.footer-inner .footer-bottom {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 768px) {
+  .footer-inner {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+
+  .footer-inner .footer-bottom {
+    grid-column: 1 / -1; /* spans both columns */
+  }
+}
+
+
+/* ---------------------------------------------------------
+   13. Legal pages (privacy.html, terms.html)
+   --------------------------------------------------------- */
+.legal {
+  max-width: 720px;
+  padding-block: var(--space-8);
+}
+
+.legal h1 {
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+}
+
+.legal h2 {
+  margin-top: var(--space-6);
+  font-size: 1.375rem;
+}
+
+.legal p {
+  margin-top: var(--space-3);
+  color: var(--color-muted);
+}
+
+.legal__updated {
+  font-size: 0.875rem;
+}
+
+.notice {
+  margin-block: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-soft);
+}

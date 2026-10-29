@@ -1295,3 +1295,62 @@ ol[role="list"] {
   border-radius: var(--radius-sm);
   background: var(--color-primary-soft);
 }
+
+
+/* ---------------------------------------------------------
+   14. Scroll animations
+   Elements with class "reveal" start invisible and slide in
+   when script.js adds "is-visible". The ".js" prefix means:
+   only hide them if JavaScript is running to show them again.
+   --------------------------------------------------------- */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Cards in a group appear one after another */
+.reveal-group > .reveal:nth-child(2) { transition-delay: 0.1s; }
+.reveal-group > .reveal:nth-child(3) { transition-delay: 0.2s; }
+.reveal-group > .reveal:nth-child(4) { transition-delay: 0.3s; }
+
+/* Chat bubbles pop in one by one, like a real conversation */
+.js .phone .msg {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.js .phone.is-visible .msg {
+  opacity: 1;
+  transform: none;
+}
+
+.js .phone.is-visible .msg:nth-child(1) { transition-delay: 0.4s; }
+.js .phone.is-visible .msg:nth-child(2) { transition-delay: 1s; }
+.js .phone.is-visible .msg:nth-child(3) { transition-delay: 1.6s; }
+.js .phone.is-visible .msg:nth-child(4) { transition-delay: 2.2s; }
+.js .phone.is-visible .msg:nth-child(5) { transition-delay: 2.8s; }
+
+/* Respect users who asked their system for less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .js .reveal,
+  .js .phone .msg {
+    opacity: 1;
+    transform: none;
+  }
+}

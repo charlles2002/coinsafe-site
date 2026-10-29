@@ -211,3 +211,28 @@ if (dialog && form) {
 document.querySelectorAll('[data-year]').forEach((element) => {
   element.textContent = new Date().getFullYear();
 });
+
+
+/* ---------------------------------------------------------
+   4. Reveal-on-scroll animations
+   IntersectionObserver tells us when an element enters the
+   screen — much lighter than listening to every scroll event.
+   --------------------------------------------------------- */
+const revealElements = document.querySelectorAll('.reveal');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+  // No animation: just show everything
+  revealElements.forEach((element) => element.classList.add('is-visible'));
+} else {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target); // animate only once
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  revealElements.forEach((element) => observer.observe(element));
+}

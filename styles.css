@@ -654,3 +654,196 @@ ol[role="list"] {
     flex: 0 0 auto;
   }
 }
+
+
+/* ---------------------------------------------------------
+   6. How it works
+   --------------------------------------------------------- */
+.steps {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.step__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.step__number {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  background: var(--color-primary-soft);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   7. Demo — phone mockup
+   --------------------------------------------------------- */
+.demo-inner {
+  display: grid;
+  align-items: center;
+  gap: var(--space-7);
+}
+
+.checklist {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-weight: 500;
+}
+
+/* The green check circle is a pseudo-element using check.svg */
+.checklist li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-brand) url("assets/icons/check.svg") center / 14px no-repeat;
+}
+
+.phone {
+  position: relative;
+  width: min(100%, 340px);
+  margin-inline: auto;
+  padding: 10px;
+  border-radius: 44px;
+  background: #0d1512;
+  box-shadow: var(--shadow-lg), inset 0 0 0 2px #26332d;
+}
+
+/* The camera "notch" */
+.phone::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  z-index: 1;
+  width: 90px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: #0d1512;
+  transform: translateX(-50%);
+}
+
+.phone__screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 580px;
+  overflow: hidden;
+  border-radius: 34px;
+  background: var(--chat-bg);
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 2.75rem var(--space-4) var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-raised);
+}
+
+.chat-header__avatar {
+  width: 36px;
+  height: 36px;
+}
+
+.chat-header__name {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.chat-header__status {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-3);
+}
+
+.msg {
+  max-width: 85%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 16px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  box-shadow: var(--shadow-sm);
+}
+
+/* align-self pushes each bubble left (bot) or right (user) */
+.msg--user {
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  background: var(--color-brand);
+  color: #fff;
+}
+
+.msg--bot {
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  background: var(--color-surface-raised);
+}
+
+.msg__time {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.6875rem;
+  text-align: right;
+  color: var(--color-muted);
+}
+
+.msg--user .msg__time {
+  color: #dcfce7;
+}
+
+.chat-input {
+  display: flex;
+  align-items: center;
+  margin: var(--space-3);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-raised);
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+.chat-input__send {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: var(--color-brand);
+}
+
+@media (min-width: 900px) {
+  .demo-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}

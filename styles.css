@@ -847,3 +847,262 @@ ol[role="list"] {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+
+/* ---------------------------------------------------------
+   8. Choose your app
+   --------------------------------------------------------- */
+.apps-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.app-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-raised);
+}
+
+.app-card h3 {
+  font-size: 1.25rem;
+}
+
+.app-card p {
+  flex-grow: 1; /* pushes the button to the bottom so all cards line up */
+  color: var(--color-muted);
+}
+
+.app-card .btn {
+  margin-top: var(--space-3);
+}
+
+.app-card--active {
+  border: 2px solid var(--color-primary);
+  box-shadow: var(--shadow);
+}
+
+/* "Faded" look for coming-soon cards. We don't use opacity on the
+   whole card, because that would make the text hard to read. */
+.app-card--soon {
+  border-style: dashed;
+  background: var(--color-surface);
+}
+
+.app-card--soon .icon-badge {
+  background: var(--color-icon-muted);
+}
+
+.app-card--soon h3 {
+  color: var(--color-muted);
+}
+
+.badge {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  padding: var(--space-1) 0.625rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.badge--live {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+.badge--soon {
+  background: var(--color-border);
+  color: var(--color-muted);
+}
+
+@media (min-width: 640px) {
+  .apps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .apps-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+
+/* ---------------------------------------------------------
+   9. Waitlist dialog & form
+   --------------------------------------------------------- */
+.dialog {
+  width: min(100% - 2rem, 440px);
+  max-height: calc(100% - 2rem);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  box-shadow: var(--shadow-lg);
+}
+
+.dialog::backdrop {
+  background: rgb(5 20 13 / 0.6);
+}
+
+.dialog__content {
+  position: relative;
+  padding: var(--space-6);
+}
+
+.dialog__close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.dialog__close:hover {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.dialog h2 {
+  padding-right: var(--space-7);
+  font-size: 1.5rem;
+}
+
+.dialog__text {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
+}
+
+.waitlist-form {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.field__label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--color-input-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+.input:focus-visible {
+  border-color: var(--color-primary);
+  outline-offset: 1px;
+}
+
+/* JS sets aria-invalid="true" when the value is wrong */
+.input[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.fieldset {
+  padding: 0;
+  border: 0;
+}
+
+.checkbox-group {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+/* :has() lets the label react to its checkbox being checked */
+.checkbox:has(input:checked) {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.checkbox input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-brand);
+}
+
+.field__error {
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-error);
+}
+
+.field__error:empty {
+  margin: 0;
+}
+
+.form-error {
+  margin-top: calc(var(--space-3) * -1);
+  text-align: center;
+}
+
+.form-note {
+  font-size: 0.8125rem;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.dialog__success {
+  padding-top: var(--space-4);
+  text-align: center;
+}
+
+.dialog__success:focus {
+  outline: none;
+}
+
+.dialog__success h2 {
+  padding-right: 0;
+}
+
+.dialog__success .btn {
+  margin-top: var(--space-5);
+}
+
+.success-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-4);
+  border-radius: 50%;
+  background: var(--color-brand);
+}

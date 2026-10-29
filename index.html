@@ -227,8 +227,121 @@
       </div>
     </section>
 
+    <!-- =====================================================
+         5. CHOOSE YOUR APP — Telegram live, others coming soon
+         Icons are generic chat bubbles, not official logos.
+         ===================================================== -->
+    <section id="apps" class="section" aria-labelledby="apps-title">
+      <div class="container">
+        <header class="section-header reveal">
+          <p class="eyebrow">Choose your app</p>
+          <h2 id="apps-title" class="section-title">Use CoinSafe where you already chat.</h2>
+          <p class="section-subtitle">
+            We're starting with Telegram. More apps are on the way — join the
+            waitlist and we'll let you know when yours is ready.
+          </p>
+        </header>
+
+        <ul class="apps-grid reveal-group" role="list">
+          <li class="app-card app-card--active reveal">
+            <span class="badge badge--live">Available now</span>
+            <span class="icon-badge icon-badge--lg"><img src="assets/icons/chat-square.svg" alt="Chat bubble icon" width="28" height="28"></span>
+            <h3>Telegram</h3>
+            <p>Start chatting with CoinSafe today.</p>
+            <!-- TODO: replace SEU_BOT_AQUI with your bot's username -->
+            <a class="btn btn--primary btn--block" href="https://t.me/SEU_BOT_AQUI" target="_blank" rel="noopener noreferrer">
+              Start on Telegram<span class="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          </li>
+
+          <!-- "Coming soon" cards: the card itself is not a link.
+               Only the "Notify me" button is interactive.
+               data-notify tells script.js which app to pre-select. -->
+          <li class="app-card app-card--soon reveal">
+            <span class="badge badge--soon">Coming soon</span>
+            <span class="icon-badge icon-badge--lg"><img src="assets/icons/chat.svg" alt="Chat bubble icon" width="28" height="28"></span>
+            <h3>WhatsApp</h3>
+            <p>Not available yet.</p>
+            <button class="btn btn--secondary btn--block" type="button" data-notify="whatsapp" aria-haspopup="dialog">
+              Notify me<span class="visually-hidden"> when CoinSafe is on WhatsApp</span>
+            </button>
+          </li>
+          <li class="app-card app-card--soon reveal">
+            <span class="badge badge--soon">Coming soon</span>
+            <span class="icon-badge icon-badge--lg"><img src="assets/icons/chat-dots.svg" alt="Chat bubble with dots icon" width="28" height="28"></span>
+            <h3>iMessage</h3>
+            <p>Not available yet.</p>
+            <button class="btn btn--secondary btn--block" type="button" data-notify="imessage" aria-haspopup="dialog">
+              Notify me<span class="visually-hidden"> when CoinSafe is on iMessage</span>
+            </button>
+          </li>
+          <li class="app-card app-card--soon reveal">
+            <span class="badge badge--soon">Coming soon</span>
+            <span class="icon-badge icon-badge--lg"><img src="assets/icons/chats.svg" alt="Two chat bubbles icon" width="28" height="28"></span>
+            <h3>Messenger</h3>
+            <p>Not available yet.</p>
+            <button class="btn btn--secondary btn--block" type="button" data-notify="messenger" aria-haspopup="dialog">
+              Notify me<span class="visually-hidden"> when CoinSafe is on Messenger</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <!-- SECTIONS -->
   </main>
+
+  <!-- =====================================================
+       6. WAITLIST — pop-up form opened by "Notify me"
+       <dialog> is a native HTML pop-up: it traps focus,
+       closes with Esc and darkens the page behind it.
+       ===================================================== -->
+  <dialog id="waitlist-dialog" class="dialog" aria-labelledby="waitlist-title">
+    <div class="dialog__content">
+      <button class="dialog__close" type="button" data-close-dialog aria-label="Close">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+
+      <!-- View 1: the form -->
+      <div data-waitlist-form-view>
+        <h2 id="waitlist-title">Get notified</h2>
+        <p class="dialog__text">Leave your email and pick the apps you use. We'll let you know when CoinSafe arrives there.</p>
+
+        <!-- novalidate: we show our own friendly error messages via JS -->
+        <form id="waitlist-form" class="waitlist-form" novalidate>
+          <div class="field">
+            <label class="field__label" for="waitlist-email">Email address</label>
+            <input class="input" type="email" id="waitlist-email" name="email" autocomplete="email"
+                   placeholder="you@example.com" required aria-describedby="waitlist-email-error">
+            <p class="field__error" id="waitlist-email-error" aria-live="polite"></p>
+          </div>
+
+          <!-- fieldset + legend group the checkboxes under one question -->
+          <fieldset class="field fieldset" aria-describedby="waitlist-apps-error">
+            <legend class="field__label">Which apps do you want?</legend>
+            <div class="checkbox-group">
+              <label class="checkbox"><input type="checkbox" name="apps" value="whatsapp"> WhatsApp</label>
+              <label class="checkbox"><input type="checkbox" name="apps" value="imessage"> iMessage</label>
+              <label class="checkbox"><input type="checkbox" name="apps" value="messenger"> Messenger</label>
+            </div>
+            <p class="field__error" id="waitlist-apps-error" aria-live="polite"></p>
+          </fieldset>
+
+          <button class="btn btn--primary btn--block" type="submit">Join the waitlist</button>
+          <p class="field__error form-error" aria-live="polite" data-form-error></p>
+          <p class="form-note">We'll only use your email to tell you about CoinSafe launches.</p>
+        </form>
+      </div>
+
+      <!-- View 2: success message (hidden until the form is sent) -->
+      <div class="dialog__success" data-waitlist-success hidden tabindex="-1">
+        <span class="success-icon"><img src="assets/icons/check.svg" alt="" width="28" height="28"></span>
+        <h2>You're on the list!</h2>
+        <p class="dialog__text">Thanks! We'll email <strong data-success-email></strong> as soon as CoinSafe is ready on your app.</p>
+        <button class="btn btn--primary btn--block" type="button" data-close-dialog>Done</button>
+      </div>
+    </div>
+  </dialog>
 
   <!-- FOOTER -->
 </body>

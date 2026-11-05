@@ -16,9 +16,11 @@ coinsafe-site/
 ├── terms.html      # Terms of Service (placeholder)
 ├── styles.css      # Styles: design tokens, layout, dark mode, animations
 ├── script.js       # Mobile menu, waitlist form, footer year, scroll animations
+├── images/
+│   ├── logo.png      # Original logo (full size)
+│   └── logo-256.png  # Smaller copy used on the site + favicon
 └── assets/
-    ├── logo.svg    # Logo + favicon
-    └── icons/      # Simple SVG icons
+    └── icons/        # Simple SVG icons
 ```
 
 ## Run locally

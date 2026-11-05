@@ -367,9 +367,12 @@ ol[role="list"] {
   color: var(--color-text);
 }
 
-.logo svg {
-  width: 32px;
-  height: 32px;
+/* The logo image is a round badge on a black square:
+   border-radius: 50% trims the black corners */
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
 .logo-accent {
@@ -764,6 +767,7 @@ ol[role="list"] {
 .chat-header__avatar {
   width: 36px;
   height: 36px;
+  border-radius: 50%;
 }
 
 .chat-header__name {
@@ -1209,11 +1213,6 @@ ol[role="list"] {
 .footer-inner {
   display: grid;
   gap: var(--space-6);
-}
-
-.footer-brand .logo img {
-  width: 32px;
-  height: 32px;
 }
 
 .footer-tagline {

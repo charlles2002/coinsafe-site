@@ -36,7 +36,7 @@ python3 -m http.server 8000
 
 - [ ] `https://t.me/SEU_BOT_AQUI` → your bot link (3 places in `index.html`, search for `SEU_BOT_AQUI`)
 - [ ] `FORMSPREE_ENDPOINT` in `script.js` → your Formspree form URL
-- [ ] `contact@example.com` → your real email (`index.html`, `privacy.html`, `terms.html`)
+- [x] Contact email → `golden_group11@outlook.com` (`index.html`, `privacy.html`, `terms.html`)
 - [ ] `privacy.html` and `terms.html` → real legal text (and the "Last updated" date)
 - [ ] FAQ answers in `index.html` (pricing, data handling) → confirm they match how the product actually works
 

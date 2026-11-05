@@ -1,462 +1,796 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CoinSafe — Your AI money assistant on Telegram</title>
-  <meta name="description" content="Set a monthly budget, text your expenses to CoinSafe on Telegram, and get a daily summary of how much of your budget you've used.">
-  <meta name="theme-color" content="#15803d">
-  <meta name="color-scheme" content="light dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoinSafe — Your AI money assistant on Telegram</title>
+    <meta
+      name="description"
+      content="Set a monthly budget, text your expenses to CoinSafe on Telegram, and get a daily summary of how much of your budget you've used."
+    />
+    <meta name="theme-color" content="#15803d" />
+    <meta name="color-scheme" content="light dark" />
 
-  <!-- Preview shown when the link is shared on social media / chat apps -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="CoinSafe — Control your spending just by chatting">
-  <meta property="og:description" content="An AI money assistant that lives in your messaging app. Now on Telegram.">
+    <!-- Preview shown when the link is shared on social media / chat apps -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="CoinSafe — Control your spending just by chatting"
+    />
+    <meta
+      property="og:description"
+      content="An AI money assistant that lives in your messaging app. Now on Telegram."
+    />
 
-  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
 
-  <!-- Adds the "js" class right away, so CSS knows JavaScript is available
+    <!-- Adds the "js" class right away, so CSS knows JavaScript is available
        (used to hide elements that will be animated in on scroll). -->
-  <script>document.documentElement.classList.add('js');</script>
-  <!-- "defer" = download now, but only run after the HTML has been read -->
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <!-- Lets keyboard users jump straight past the menu -->
-  <a class="skip-link" href="#main">Skip to main content</a>
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <!-- "defer" = download now, but only run after the HTML has been read -->
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- Lets keyboard users jump straight past the menu -->
+    <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- =====================================================
+    <!-- =====================================================
        1. HEADER — logo + navigation
        ===================================================== -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="logo" href="#main" aria-label="CoinSafe — back to top">
-        <!-- Logo drawn in SVG: a shield (safety) with a coin (money) -->
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M16 2.5 27 6.5v8.2c0 6.9-4.6 12.6-11 14.8C9.6 27.3 5 21.6 5 14.7V6.5L16 2.5z" fill="#15803d"/>
-          <circle cx="16" cy="15" r="6.5" fill="none" stroke="#fff" stroke-width="1.8"/>
-          <path d="M16 10.6v8.8M18.3 12.6c-.4-.7-1.3-1.2-2.4-1.2-1.4 0-2.4.8-2.4 1.8 0 2.5 5 1.3 5 3.8 0 1.1-1.1 1.9-2.6 1.9-1.1 0-2.1-.5-2.6-1.3" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-        <span>Coin<span class="logo-accent">Safe</span></span>
-      </a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="#main" aria-label="CoinSafe — back to top">
+          <!-- Logo drawn in SVG: a shield (safety) with a coin (money) -->
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <path
+              d="M16 2.5 27 6.5v8.2c0 6.9-4.6 12.6-11 14.8C9.6 27.3 5 21.6 5 14.7V6.5L16 2.5z"
+              fill="#15803d"
+            />
+            <circle
+              cx="16"
+              cy="15"
+              r="6.5"
+              fill="none"
+              stroke="#fff"
+              stroke-width="1.8"
+            />
+            <path
+              d="M16 10.6v8.8M18.3 12.6c-.4-.7-1.3-1.2-2.4-1.2-1.4 0-2.4.8-2.4 1.8 0 2.5 5 1.3 5 3.8 0 1.1-1.1 1.9-2.6 1.9-1.1 0-2.1-.5-2.6-1.3"
+              fill="none"
+              stroke="#fff"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span>Coin<span class="logo-accent">Safe</span></span>
+        </a>
 
-      <!-- Hamburger button (mobile only). aria-expanded tells screen
+        <!-- Hamburger button (mobile only). aria-expanded tells screen
            readers whether the menu is open; script.js updates it. -->
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-        <span class="nav-toggle__bar"></span>
-        <span class="nav-toggle__bar"></span>
-        <span class="nav-toggle__bar"></span>
-      </button>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          aria-label="Open menu"
+        >
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
 
-      <nav id="site-nav" class="site-nav" aria-label="Main">
-        <ul class="nav-list" role="list">
-          <li><a class="nav-link" href="#how-it-works">How it works</a></li>
-          <li><a class="nav-link" href="#demo">Demo</a></li>
-          <li><a class="nav-link" href="#apps">Apps</a></li>
-          <li><a class="nav-link" href="#features">Features</a></li>
-          <li><a class="nav-link" href="#faq">FAQ</a></li>
-          <li class="nav-cta">
-            <!-- TODO: replace SEU_BOT_AQUI with your bot's username -->
-            <a class="btn btn--primary" href="https://t.me/SEU_BOT_AQUI" target="_blank" rel="noopener noreferrer">
-              Start on Telegram<span class="visually-hidden"> (opens in a new tab)</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+        <nav id="site-nav" class="site-nav" aria-label="Main">
+          <ul class="nav-list" role="list">
+            <li><a class="nav-link" href="#how-it-works">How it works</a></li>
+            <li><a class="nav-link" href="#demo">Demo</a></li>
+            <li><a class="nav-link" href="#apps">Apps</a></li>
+            <li><a class="nav-link" href="#features">Features</a></li>
+            <li><a class="nav-link" href="#faq">FAQ</a></li>
+            <li class="nav-cta">
+              <!-- TODO: replace SEU_BOT_AQUI with your bot's username -->
+              <a
+                class="btn btn--primary"
+                href="https://t.me/SEU_BOT_AQUI"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Start on Telegram<span class="visually-hidden">
+                  (opens in a new tab)</span
+                >
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <main id="main">
-    <!-- =====================================================
+    <main id="main">
+      <!-- =====================================================
          2. HERO — the first thing visitors see
          ===================================================== -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-inner">
-        <div class="hero-content">
-          <p class="eyebrow">AI money assistant · Now on Telegram</p>
-          <h1 id="hero-title" class="hero-title">
-            Control your spending <span class="text-accent">just by chatting.</span>
-          </h1>
-          <p class="hero-subtitle">
-            Set a monthly budget, text CoinSafe what you spend, and get a daily
-            summary of how much of your budget you've used — right inside Telegram.
-          </p>
-          <div class="hero-actions">
-            <!-- TODO: replace SEU_BOT_AQUI with your bot's username -->
-            <a class="btn btn--primary btn--lg" href="https://t.me/SEU_BOT_AQUI" target="_blank" rel="noopener noreferrer">
-              Start on Telegram<span class="visually-hidden"> (opens in a new tab)</span>
-            </a>
-            <a class="btn btn--secondary btn--lg" href="#how-it-works">See how it works</a>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero-inner">
+          <div class="hero-content">
+            <p class="eyebrow">AI money assistant · Now on Telegram</p>
+            <h1 id="hero-title" class="hero-title">
+              Control your spending
+              <span class="text-accent">just by chatting.</span>
+            </h1>
+            <p class="hero-subtitle">
+              Set a monthly budget, text CoinSafe what you spend, and get a
+              daily summary of how much of your budget you've used right inside
+              Telegram.
+            </p>
+            <div class="hero-actions">
+              <!-- TODO: replace SEU_BOT_AQUI with your bot's username -->
+              <a
+                class="btn btn--primary btn--lg"
+                href="https://t.me/SEU_BOT_AQUI"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Start on Telegram<span class="visually-hidden">
+                  (opens in a new tab)</span
+                >
+              </a>
+              <a class="btn btn--secondary btn--lg" href="#how-it-works"
+                >See how it works</a
+              >
+            </div>
+            <p class="hero-note">
+              No new app to download. WhatsApp and more coming soon.
+            </p>
           </div>
-          <p class="hero-note">No new app to download. WhatsApp and more coming soon.</p>
-        </div>
 
-        <!-- Decorative preview card. aria-hidden hides it from screen
+          <!-- Decorative preview card. aria-hidden hides it from screen
              readers because the same info is in the chat demo below. -->
-        <div class="hero-visual" aria-hidden="true">
-          <div class="summary-card">
-            <p class="summary-card__header"><span class="summary-card__dot"></span>Daily summary · Today</p>
-            <p class="summary-card__label">Monthly budget used</p>
-            <p class="summary-card__value">42%</p>
-            <!-- The bar width comes from the --value variable -->
-            <div class="progress"><div class="progress__bar" style="--value: 42%"></div></div>
-            <p class="summary-card__meta">$834.50 of $2,000 · On track</p>
-            <ul class="summary-card__list" role="list">
-              <li><span>🚗 Transportation</span><span>$35.00</span></li>
-              <li><span>🍔 Food &amp; Dining</span><span>$14.50</span></li>
-            </ul>
+          <div class="hero-visual" aria-hidden="true">
+            <div class="summary-card">
+              <p class="summary-card__header">
+                <span class="summary-card__dot"></span>Daily summary · Today
+              </p>
+              <p class="summary-card__label">Monthly budget used</p>
+              <p class="summary-card__value">42%</p>
+              <!-- The bar width comes from the --value variable -->
+              <div class="progress">
+                <div class="progress__bar" style="--value: 42%"></div>
+              </div>
+              <p class="summary-card__meta">$834.50 of $2,000 · On track</p>
+              <ul class="summary-card__list" role="list">
+                <li><span>🚗 Transportation</span><span>$35.00</span></li>
+                <li><span>🍔 Food &amp; Dining</span><span>$14.50</span></li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- =====================================================
+      <!-- =====================================================
          3. HOW IT WORKS — 3 steps
          ===================================================== -->
-    <section id="how-it-works" class="section" aria-labelledby="how-title">
-      <div class="container">
-        <header class="section-header reveal">
-          <p class="eyebrow">How it works</p>
-          <h2 id="how-title" class="section-title">Three steps. Zero spreadsheets.</h2>
-          <p class="section-subtitle">CoinSafe does the math, so you don't have to.</p>
-        </header>
+      <section id="how-it-works" class="section" aria-labelledby="how-title">
+        <div class="container">
+          <header class="section-header reveal">
+            <p class="eyebrow">How it works</p>
+            <h2 id="how-title" class="section-title">
+              Three steps. Zero spreadsheets.
+            </h2>
+            <p class="section-subtitle">
+              CoinSafe does the math, so you don't have to.
+            </p>
+          </header>
 
-        <!-- An ordered list (<ol>) because the steps have an order -->
-        <ol class="steps reveal-group" role="list">
-          <li class="card step reveal">
-            <div class="step__top">
-              <span class="icon-badge"><img src="assets/icons/target.svg" alt="Target icon" width="24" height="24"></span>
-              <span class="step__number">Step 1</span>
-            </div>
-            <h3>Set your monthly budget</h3>
-            <p>Tell CoinSafe how much you want to spend this month — for example, “my budget is $2,000.”</p>
-          </li>
-          <li class="card step reveal">
-            <div class="step__top">
-              <span class="icon-badge"><img src="assets/icons/chat.svg" alt="Chat bubble icon" width="24" height="24"></span>
-              <span class="step__number">Step 2</span>
-            </div>
-            <h3>Text your expenses</h3>
-            <p>Type it the way you'd tell a friend: “spent 35 on uber” or “coffee 4.50.” The AI picks up the amount and category.</p>
-          </li>
-          <li class="card step reveal">
-            <div class="step__top">
-              <span class="icon-badge"><img src="assets/icons/chart.svg" alt="Bar chart icon" width="24" height="24"></span>
-              <span class="step__number">Step 3</span>
-            </div>
-            <h3>Get your daily summary</h3>
-            <p>Every evening, CoinSafe sends a quick recap of what you spent and the % of your monthly budget already used.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
+          <!-- An ordered list (<ol>) because the steps have an order -->
+          <ol class="steps reveal-group" role="list">
+            <li class="card step reveal">
+              <div class="step__top">
+                <span class="icon-badge"
+                  ><img
+                    src="assets/icons/target.svg"
+                    alt="Target icon"
+                    width="24"
+                    height="24"
+                /></span>
+                <span class="step__number">Step 1</span>
+              </div>
+              <h3>Set your monthly budget</h3>
+              <p>
+                Tell CoinSafe how much you want to spend this month — for
+                example, “my budget is $2,000.”
+              </p>
+            </li>
+            <li class="card step reveal">
+              <div class="step__top">
+                <span class="icon-badge"
+                  ><img
+                    src="assets/icons/chat.svg"
+                    alt="Chat bubble icon"
+                    width="24"
+                    height="24"
+                /></span>
+                <span class="step__number">Step 2</span>
+              </div>
+              <h3>Text your expenses</h3>
+              <p>
+                Type it the way you'd tell a friend: “spent 35 on uber” or
+                “coffee 4.50.” The AI picks up the amount and category.
+              </p>
+            </li>
+            <li class="card step reveal">
+              <div class="step__top">
+                <span class="icon-badge"
+                  ><img
+                    src="assets/icons/chart.svg"
+                    alt="Bar chart icon"
+                    width="24"
+                    height="24"
+                /></span>
+                <span class="step__number">Step 3</span>
+              </div>
+              <h3>Get your daily summary</h3>
+              <p>
+                Every evening, CoinSafe sends a quick recap of what you spent
+                and the % of your monthly budget already used.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
 
-    <!-- =====================================================
+      <!-- =====================================================
          4. DEMO — phone mockup with a sample conversation
          ===================================================== -->
-    <section id="demo" class="section section--alt" aria-labelledby="demo-title">
-      <div class="container demo-inner">
-        <div class="demo-text reveal">
-          <p class="eyebrow">See it in action</p>
-          <h2 id="demo-title" class="section-title">Like texting a friend who's great with money.</h2>
-          <p class="section-subtitle">
-            No forms, no categories to pick, no app to open. Just send a message
-            and CoinSafe keeps everything organized for you.
-          </p>
-          <ul class="checklist" role="list">
-            <li>Understands everyday language</li>
-            <li>Sorts each expense into a category</li>
-            <li>Shows your budget % after every message</li>
-          </ul>
-        </div>
+      <section
+        id="demo"
+        class="section section--alt"
+        aria-labelledby="demo-title"
+      >
+        <div class="container demo-inner">
+          <div class="demo-text reveal">
+            <p class="eyebrow">See it in action</p>
+            <h2 id="demo-title" class="section-title">
+              Like texting a friend who's great with money.
+            </h2>
+            <p class="section-subtitle">
+              No forms, no categories to pick, no app to open. Just send a
+              message and CoinSafe keeps everything organized for you.
+            </p>
+            <ul class="checklist" role="list">
+              <li>Understands everyday language</li>
+              <li>Sorts each expense into a category</li>
+              <li>Shows your budget % after every message</li>
+            </ul>
+          </div>
 
-        <!-- The phone is pure HTML/CSS. The conversation is a real list,
+          <!-- The phone is pure HTML/CSS. The conversation is a real list,
              so screen readers can read it in order. -->
-        <div class="phone reveal">
-          <div class="phone__screen">
-            <div class="chat-header">
-              <svg class="chat-header__avatar" viewBox="0 0 32 32" aria-hidden="true">
-                <path d="M16 2.5 27 6.5v8.2c0 6.9-4.6 12.6-11 14.8C9.6 27.3 5 21.6 5 14.7V6.5L16 2.5z" fill="#15803d"/>
-                <circle cx="16" cy="15" r="6.5" fill="none" stroke="#fff" stroke-width="1.8"/>
-                <path d="M16 10.6v8.8M18.3 12.6c-.4-.7-1.3-1.2-2.4-1.2-1.4 0-2.4.8-2.4 1.8 0 2.5 5 1.3 5 3.8 0 1.1-1.1 1.9-2.6 1.9-1.1 0-2.1-.5-2.6-1.3" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
-              </svg>
-              <div>
-                <p class="chat-header__name">CoinSafe</p>
-                <p class="chat-header__status">bot</p>
+          <div class="phone reveal">
+            <div class="phone__screen">
+              <div class="chat-header">
+                <svg
+                  class="chat-header__avatar"
+                  viewBox="0 0 32 32"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M16 2.5 27 6.5v8.2c0 6.9-4.6 12.6-11 14.8C9.6 27.3 5 21.6 5 14.7V6.5L16 2.5z"
+                    fill="#15803d"
+                  />
+                  <circle
+                    cx="16"
+                    cy="15"
+                    r="6.5"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="1.8"
+                  />
+                  <path
+                    d="M16 10.6v8.8M18.3 12.6c-.4-.7-1.3-1.2-2.4-1.2-1.4 0-2.4.8-2.4 1.8 0 2.5 5 1.3 5 3.8 0 1.1-1.1 1.9-2.6 1.9-1.1 0-2.1-.5-2.6-1.3"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <div>
+                  <p class="chat-header__name">CoinSafe</p>
+                  <p class="chat-header__status">bot</p>
+                </div>
               </div>
-            </div>
 
-            <ol class="chat" role="list" aria-label="Example conversation with the CoinSafe bot">
-              <li class="msg msg--user">
-                <span class="visually-hidden">You: </span>spent 35 on uber
-                <span class="msg__time">12:41 PM</span>
-              </li>
-              <li class="msg msg--bot">
-                <span class="visually-hidden">CoinSafe: </span>Got it! 🚗 <strong>$35.00</strong> · Transportation<br>
-                You've used <strong>41%</strong> of your monthly budget ($820 of $2,000).
-                <span class="msg__time">12:41 PM</span>
-              </li>
-              <li class="msg msg--user">
-                <span class="visually-hidden">You: </span>lunch 14.50
-                <span class="msg__time">1:15 PM</span>
-              </li>
-              <li class="msg msg--bot">
-                <span class="visually-hidden">CoinSafe: </span>🍔 <strong>$14.50</strong> · Food &amp; Dining<br>
-                Budget used: <strong>42%</strong>
-                <span class="msg__time">1:15 PM</span>
-              </li>
-              <li class="msg msg--bot">
-                <span class="visually-hidden">CoinSafe: </span>📊 <strong>Daily summary</strong><br>
-                Spent today: $49.50<br>
-                Budget used: 42% ($834.50 of $2,000)<br>
-                You're on track! 💡 Packing lunch twice a week could save you about $100 a month.
-                <span class="msg__time">9:00 PM</span>
-              </li>
-            </ol>
+              <ol
+                class="chat"
+                role="list"
+                aria-label="Example conversation with the CoinSafe bot"
+              >
+                <li class="msg msg--user">
+                  <span class="visually-hidden">You: </span>spent 35 on uber
+                  <span class="msg__time">12:41 PM</span>
+                </li>
+                <li class="msg msg--bot">
+                  <span class="visually-hidden">CoinSafe: </span>Got it! 🚗
+                  <strong>$35.00</strong> · Transportation<br />
+                  You've used <strong>41%</strong> of your monthly budget ($820
+                  of $2,000).
+                  <span class="msg__time">12:41 PM</span>
+                </li>
+                <li class="msg msg--user">
+                  <span class="visually-hidden">You: </span>lunch 14.50
+                  <span class="msg__time">1:15 PM</span>
+                </li>
+                <li class="msg msg--bot">
+                  <span class="visually-hidden">CoinSafe: </span>🍔
+                  <strong>$14.50</strong> · Food &amp; Dining<br />
+                  Budget used: <strong>42%</strong>
+                  <span class="msg__time">1:15 PM</span>
+                </li>
+                <li class="msg msg--bot">
+                  <span class="visually-hidden">CoinSafe: </span>📊
+                  <strong>Daily summary</strong><br />
+                  Spent today: $49.50<br />
+                  Budget used: 42% ($834.50 of $2,000)<br />
+                  You're on track! 💡 Packing lunch twice a week could save you
+                  about $100 a month.
+                  <span class="msg__time">9:00 PM</span>
+                </li>
+              </ol>
 
-            <!-- Fake input bar, just for looks -->
-            <div class="chat-input" aria-hidden="true">
-              <span>Message</span>
-              <span class="chat-input__send">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-              </span>
+              <!-- Fake input bar, just for looks -->
+              <div class="chat-input" aria-hidden="true">
+                <span>Message</span>
+                <span class="chat-input__send">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="#fff"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 19V5M5 12l7-7 7 7" />
+                  </svg>
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- =====================================================
+      <!-- =====================================================
          5. CHOOSE YOUR APP — Telegram live, others coming soon
          Icons are generic chat bubbles, not official logos.
          ===================================================== -->
-    <section id="apps" class="section" aria-labelledby="apps-title">
-      <div class="container">
-        <header class="section-header reveal">
-          <p class="eyebrow">Choose your app</p>
-          <h2 id="apps-title" class="section-title">Use CoinSafe where you already chat.</h2>
-          <p class="section-subtitle">
-            We're starting with Telegram. More apps are on the way — join the
-            waitlist and we'll let you know when yours is ready.
-          </p>
-        </header>
+      <section id="apps" class="section" aria-labelledby="apps-title">
+        <div class="container">
+          <header class="section-header reveal">
+            <p class="eyebrow">Choose your app</p>
+            <h2 id="apps-title" class="section-title">
+              Use CoinSafe where you already chat.
+            </h2>
+            <p class="section-subtitle">
+              We're starting with Telegram. More apps are on the way — join the
+              waitlist and we'll let you know when yours is ready.
+            </p>
+          </header>
 
-        <ul class="apps-grid reveal-group" role="list">
-          <li class="app-card app-card--active reveal">
-            <span class="badge badge--live">Available now</span>
-            <span class="icon-badge icon-badge--lg"><img src="assets/icons/chat-square.svg" alt="Chat bubble icon" width="28" height="28"></span>
-            <h3>Telegram</h3>
-            <p>Start chatting with CoinSafe today.</p>
-            <!-- TODO: replace SEU_BOT_AQUI with your bot's username -->
-            <a class="btn btn--primary btn--block" href="https://t.me/SEU_BOT_AQUI" target="_blank" rel="noopener noreferrer">
-              Start on Telegram<span class="visually-hidden"> (opens in a new tab)</span>
-            </a>
-          </li>
+          <ul class="apps-grid reveal-group" role="list">
+            <li class="app-card app-card--active reveal">
+              <span class="badge badge--live">Available now</span>
+              <span class="icon-badge icon-badge--lg"
+                ><img
+                  src="assets/icons/chat-square.svg"
+                  alt="Chat bubble icon"
+                  width="28"
+                  height="28"
+              /></span>
+              <h3>Telegram</h3>
+              <p>Start chatting with CoinSafe today.</p>
+              <!-- TODO: replace SEU_BOT_AQUI with your bot's username -->
+              <a
+                class="btn btn--primary btn--block"
+                href="https://t.me/SEU_BOT_AQUI"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Start on Telegram<span class="visually-hidden">
+                  (opens in a new tab)</span
+                >
+              </a>
+            </li>
 
-          <!-- "Coming soon" cards: the card itself is not a link.
+            <!-- "Coming soon" cards: the card itself is not a link.
                Only the "Notify me" button is interactive.
                data-notify tells script.js which app to pre-select. -->
-          <li class="app-card app-card--soon reveal">
-            <span class="badge badge--soon">Coming soon</span>
-            <span class="icon-badge icon-badge--lg"><img src="assets/icons/chat.svg" alt="Chat bubble icon" width="28" height="28"></span>
-            <h3>WhatsApp</h3>
-            <p>Not available yet.</p>
-            <button class="btn btn--secondary btn--block" type="button" data-notify="whatsapp" aria-haspopup="dialog">
-              Notify me<span class="visually-hidden"> when CoinSafe is on WhatsApp</span>
-            </button>
-          </li>
-          <li class="app-card app-card--soon reveal">
-            <span class="badge badge--soon">Coming soon</span>
-            <span class="icon-badge icon-badge--lg"><img src="assets/icons/chat-dots.svg" alt="Chat bubble with dots icon" width="28" height="28"></span>
-            <h3>iMessage</h3>
-            <p>Not available yet.</p>
-            <button class="btn btn--secondary btn--block" type="button" data-notify="imessage" aria-haspopup="dialog">
-              Notify me<span class="visually-hidden"> when CoinSafe is on iMessage</span>
-            </button>
-          </li>
-          <li class="app-card app-card--soon reveal">
-            <span class="badge badge--soon">Coming soon</span>
-            <span class="icon-badge icon-badge--lg"><img src="assets/icons/chats.svg" alt="Two chat bubbles icon" width="28" height="28"></span>
-            <h3>Messenger</h3>
-            <p>Not available yet.</p>
-            <button class="btn btn--secondary btn--block" type="button" data-notify="messenger" aria-haspopup="dialog">
-              Notify me<span class="visually-hidden"> when CoinSafe is on Messenger</span>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </section>
+            <li class="app-card app-card--soon reveal">
+              <span class="badge badge--soon">Coming soon</span>
+              <span class="icon-badge icon-badge--lg"
+                ><img
+                  src="assets/icons/chat.svg"
+                  alt="Chat bubble icon"
+                  width="28"
+                  height="28"
+              /></span>
+              <h3>WhatsApp</h3>
+              <p>Not available yet.</p>
+              <button
+                class="btn btn--secondary btn--block"
+                type="button"
+                data-notify="whatsapp"
+                aria-haspopup="dialog"
+              >
+                Notify me<span class="visually-hidden">
+                  when CoinSafe is on WhatsApp</span
+                >
+              </button>
+            </li>
+            <li class="app-card app-card--soon reveal">
+              <span class="badge badge--soon">Coming soon</span>
+              <span class="icon-badge icon-badge--lg"
+                ><img
+                  src="assets/icons/chat-dots.svg"
+                  alt="Chat bubble with dots icon"
+                  width="28"
+                  height="28"
+              /></span>
+              <h3>iMessage</h3>
+              <p>Not available yet.</p>
+              <button
+                class="btn btn--secondary btn--block"
+                type="button"
+                data-notify="imessage"
+                aria-haspopup="dialog"
+              >
+                Notify me<span class="visually-hidden">
+                  when CoinSafe is on iMessage</span
+                >
+              </button>
+            </li>
+            <li class="app-card app-card--soon reveal">
+              <span class="badge badge--soon">Coming soon</span>
+              <span class="icon-badge icon-badge--lg"
+                ><img
+                  src="assets/icons/chats.svg"
+                  alt="Two chat bubbles icon"
+                  width="28"
+                  height="28"
+              /></span>
+              <h3>Messenger</h3>
+              <p>Not available yet.</p>
+              <button
+                class="btn btn--secondary btn--block"
+                type="button"
+                data-notify="messenger"
+                aria-haspopup="dialog"
+              >
+                Notify me<span class="visually-hidden">
+                  when CoinSafe is on Messenger</span
+                >
+              </button>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-    <!-- =====================================================
+      <!-- =====================================================
          7. FEATURES
          ===================================================== -->
-    <section id="features" class="section section--alt" aria-labelledby="features-title">
-      <div class="container">
-        <header class="section-header reveal">
-          <p class="eyebrow">Features</p>
-          <h2 id="features-title" class="section-title">Everything you need to stay on budget.</h2>
-        </header>
+      <section
+        id="features"
+        class="section section--alt"
+        aria-labelledby="features-title"
+      >
+        <div class="container">
+          <header class="section-header reveal">
+            <p class="eyebrow">Features</p>
+            <h2 id="features-title" class="section-title">
+              Everything you need to stay on budget.
+            </h2>
+          </header>
 
-        <ul class="features-grid reveal-group" role="list">
-          <li class="card feature-card reveal">
-            <span class="icon-badge"><img src="assets/icons/target.svg" alt="Target icon" width="24" height="24"></span>
-            <h3>Monthly budget goal</h3>
-            <p>Pick a spending limit for the month. CoinSafe keeps a running total and shows the % you've used after every expense.</p>
-          </li>
-          <li class="card feature-card reveal">
-            <span class="icon-badge"><img src="assets/icons/chart.svg" alt="Bar chart icon" width="24" height="24"></span>
-            <h3>Daily summary</h3>
-            <p>A short recap every evening: what you spent today, by category, and how your month is going.</p>
-          </li>
-          <li class="card feature-card reveal">
-            <span class="icon-badge"><img src="assets/icons/lightbulb.svg" alt="Light bulb icon" width="24" height="24"></span>
-            <h3>Money tips</h3>
-            <p>Practical, bite-sized tips to help you cut back on spending without giving up what matters to you.</p>
-          </li>
-          <li class="card feature-card reveal">
-            <span class="icon-badge"><img src="assets/icons/savings.svg" alt="Savings jar icon" width="24" height="24"></span>
-            <h3>Savings goals</h3>
-            <p>Saving for a trip, a new laptop or an emergency fund? Set a goal and CoinSafe helps you put money aside.</p>
-          </li>
-        </ul>
-      </div>
-    </section>
+          <ul class="features-grid reveal-group" role="list">
+            <li class="card feature-card reveal">
+              <span class="icon-badge"
+                ><img
+                  src="assets/icons/target.svg"
+                  alt="Target icon"
+                  width="24"
+                  height="24"
+              /></span>
+              <h3>Monthly budget goal</h3>
+              <p>
+                Pick a spending limit for the month. CoinSafe keeps a running
+                total and shows the % you've used after every expense.
+              </p>
+            </li>
+            <li class="card feature-card reveal">
+              <span class="icon-badge"
+                ><img
+                  src="assets/icons/chart.svg"
+                  alt="Bar chart icon"
+                  width="24"
+                  height="24"
+              /></span>
+              <h3>Daily summary</h3>
+              <p>
+                A short recap every evening: what you spent today, by category,
+                and how your month is going.
+              </p>
+            </li>
+            <li class="card feature-card reveal">
+              <span class="icon-badge"
+                ><img
+                  src="assets/icons/lightbulb.svg"
+                  alt="Light bulb icon"
+                  width="24"
+                  height="24"
+              /></span>
+              <h3>Money tips</h3>
+              <p>
+                Practical, bite-sized tips to help you cut back on spending
+                without giving up what matters to you.
+              </p>
+            </li>
+            <li class="card feature-card reveal">
+              <span class="icon-badge"
+                ><img
+                  src="assets/icons/savings.svg"
+                  alt="Savings jar icon"
+                  width="24"
+                  height="24"
+              /></span>
+              <h3>Savings goals</h3>
+              <p>
+                Saving for a trip, a new laptop or an emergency fund? Set a goal
+                and CoinSafe helps you put money aside.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-    <!-- =====================================================
+      <!-- =====================================================
          8. FAQ — <details>/<summary> is a native accordion:
          keyboard-accessible with zero JavaScript.
          name="faq" makes only one answer open at a time
          (in browsers that support it).
          ===================================================== -->
-    <section id="faq" class="section" aria-labelledby="faq-title">
-      <div class="container">
-        <header class="section-header reveal">
-          <p class="eyebrow">FAQ</p>
-          <h2 id="faq-title" class="section-title">Questions? We've got answers.</h2>
-        </header>
+      <section id="faq" class="section" aria-labelledby="faq-title">
+        <div class="container">
+          <header class="section-header reveal">
+            <p class="eyebrow">FAQ</p>
+            <h2 id="faq-title" class="section-title">
+              Questions? We've got answers.
+            </h2>
+          </header>
 
-        <div class="faq-list">
-          <details class="faq-item reveal" name="faq">
-            <summary>Is CoinSafe free?</summary>
-            <div class="faq-answer">
-              <p>CoinSafe is in early access and free to try. If we ever introduce paid plans, we'll tell you clearly before anything changes.</p>
-            </div>
-          </details>
+          <div class="faq-list">
+            <details class="faq-item reveal" name="faq">
+              <summary>Is CoinSafe free?</summary>
+              <div class="faq-answer">
+                <p>
+                  CoinSafe is in early access and free to try. If we ever
+                  introduce paid plans, we'll tell you clearly before anything
+                  changes.
+                </p>
+              </div>
+            </details>
 
-          <details class="faq-item reveal" name="faq">
-            <summary>Which messaging apps does it work with?</summary>
-            <div class="faq-answer">
-              <p>Right now, CoinSafe works on Telegram only. WhatsApp, iMessage and Messenger are coming soon — <a href="#apps">join the waitlist</a> to hear when your app is ready.</p>
-            </div>
-          </details>
+            <details class="faq-item reveal" name="faq">
+              <summary>Which messaging apps does it work with?</summary>
+              <div class="faq-answer">
+                <p>
+                  Right now, CoinSafe works on Telegram only. WhatsApp, iMessage
+                  and Messenger are coming soon —
+                  <a href="#apps">join the waitlist</a> to hear when your app is
+                  ready.
+                </p>
+              </div>
+            </details>
 
-          <details class="faq-item reveal" name="faq">
-            <summary>Do I need to connect my bank account?</summary>
-            <div class="faq-answer">
-              <p>No. You simply tell CoinSafe what you spent by sending a message. It doesn't ask for your bank login or card numbers.</p>
-            </div>
-          </details>
+            <details class="faq-item reveal" name="faq">
+              <summary>Do I need to connect my bank account?</summary>
+              <div class="faq-answer">
+                <p>
+                  No. You simply tell CoinSafe what you spent by sending a
+                  message. It doesn't ask for your bank login or card numbers.
+                </p>
+              </div>
+            </details>
 
-          <details class="faq-item reveal" name="faq">
-            <summary>Is my data safe?</summary>
-            <div class="faq-answer">
-              <p>We aim to collect only what's needed to track your spending and send your summaries, and we're continuing to improve how we protect it. Please avoid sharing sensitive information like passwords or full card numbers in the chat. You can read more in our <a href="privacy.html">Privacy Policy</a>.</p>
-            </div>
-          </details>
+            <details class="faq-item reveal" name="faq">
+              <summary>Is my data safe?</summary>
+              <div class="faq-answer">
+                <p>
+                  We aim to collect only what's needed to track your spending
+                  and send your summaries, and we're continuing to improve how
+                  we protect it. Please avoid sharing sensitive information like
+                  passwords or full card numbers in the chat. You can read more
+                  in our <a href="privacy.html">Privacy Policy</a>.
+                </p>
+              </div>
+            </details>
 
-          <details class="faq-item reveal" name="faq">
-            <summary>Is CoinSafe financial advice?</summary>
-            <div class="faq-answer">
-              <p>No. CoinSafe's tips are general, educational information to help you build better money habits. For decisions about investing, taxes or debt, talk to a qualified professional.</p>
-            </div>
-          </details>
+            <details class="faq-item reveal" name="faq">
+              <summary>Is CoinSafe financial advice?</summary>
+              <div class="faq-answer">
+                <p>
+                  No. CoinSafe's tips are general, educational information to
+                  help you build better money habits. For decisions about
+                  investing, taxes or debt, talk to a qualified professional.
+                </p>
+              </div>
+            </details>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-  </main>
-
-  <!-- =====================================================
+    <!-- =====================================================
        6. WAITLIST — pop-up form opened by "Notify me"
        <dialog> is a native HTML pop-up: it traps focus,
        closes with Esc and darkens the page behind it.
        ===================================================== -->
-  <dialog id="waitlist-dialog" class="dialog" aria-labelledby="waitlist-title">
-    <div class="dialog__content">
-      <button class="dialog__close" type="button" data-close-dialog aria-label="Close">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
+    <dialog
+      id="waitlist-dialog"
+      class="dialog"
+      aria-labelledby="waitlist-title"
+    >
+      <div class="dialog__content">
+        <button
+          class="dialog__close"
+          type="button"
+          data-close-dialog
+          aria-label="Close"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="22"
+            height="22"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
 
-      <!-- View 1: the form -->
-      <div data-waitlist-form-view>
-        <h2 id="waitlist-title">Get notified</h2>
-        <p class="dialog__text">Leave your email and pick the apps you use. We'll let you know when CoinSafe arrives there.</p>
+        <!-- View 1: the form -->
+        <div data-waitlist-form-view>
+          <h2 id="waitlist-title">Get notified</h2>
+          <p class="dialog__text">
+            Leave your email and pick the apps you use. We'll let you know when
+            CoinSafe arrives there.
+          </p>
 
-        <!-- novalidate: we show our own friendly error messages via JS -->
-        <form id="waitlist-form" class="waitlist-form" novalidate>
-          <div class="field">
-            <label class="field__label" for="waitlist-email">Email address</label>
-            <input class="input" type="email" id="waitlist-email" name="email" autocomplete="email"
-                   placeholder="you@example.com" required aria-describedby="waitlist-email-error">
-            <p class="field__error" id="waitlist-email-error" aria-live="polite"></p>
-          </div>
-
-          <!-- fieldset + legend group the checkboxes under one question -->
-          <fieldset class="field fieldset" aria-describedby="waitlist-apps-error">
-            <legend class="field__label">Which apps do you want?</legend>
-            <div class="checkbox-group">
-              <label class="checkbox"><input type="checkbox" name="apps" value="whatsapp"> WhatsApp</label>
-              <label class="checkbox"><input type="checkbox" name="apps" value="imessage"> iMessage</label>
-              <label class="checkbox"><input type="checkbox" name="apps" value="messenger"> Messenger</label>
+          <!-- novalidate: we show our own friendly error messages via JS -->
+          <form id="waitlist-form" class="waitlist-form" novalidate>
+            <div class="field">
+              <label class="field__label" for="waitlist-email"
+                >Email address</label
+              >
+              <input
+                class="input"
+                type="email"
+                id="waitlist-email"
+                name="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+                required
+                aria-describedby="waitlist-email-error"
+              />
+              <p
+                class="field__error"
+                id="waitlist-email-error"
+                aria-live="polite"
+              ></p>
             </div>
-            <p class="field__error" id="waitlist-apps-error" aria-live="polite"></p>
-          </fieldset>
 
-          <button class="btn btn--primary btn--block" type="submit">Join the waitlist</button>
-          <p class="field__error form-error" aria-live="polite" data-form-error></p>
-          <p class="form-note">We'll only use your email to tell you about CoinSafe launches.</p>
-        </form>
+            <!-- fieldset + legend group the checkboxes under one question -->
+            <fieldset
+              class="field fieldset"
+              aria-describedby="waitlist-apps-error"
+            >
+              <legend class="field__label">Which apps do you want?</legend>
+              <div class="checkbox-group">
+                <label class="checkbox"
+                  ><input type="checkbox" name="apps" value="whatsapp" />
+                  WhatsApp</label
+                >
+                <label class="checkbox"
+                  ><input type="checkbox" name="apps" value="imessage" />
+                  iMessage</label
+                >
+                <label class="checkbox"
+                  ><input type="checkbox" name="apps" value="messenger" />
+                  Messenger</label
+                >
+              </div>
+              <p
+                class="field__error"
+                id="waitlist-apps-error"
+                aria-live="polite"
+              ></p>
+            </fieldset>
+
+            <button class="btn btn--primary btn--block" type="submit">
+              Join the waitlist
+            </button>
+            <p
+              class="field__error form-error"
+              aria-live="polite"
+              data-form-error
+            ></p>
+            <p class="form-note">
+              We'll only use your email to tell you about CoinSafe launches.
+            </p>
+          </form>
+        </div>
+
+        <!-- View 2: success message (hidden until the form is sent) -->
+        <div class="dialog__success" data-waitlist-success hidden tabindex="-1">
+          <span class="success-icon"
+            ><img src="assets/icons/check.svg" alt="" width="28" height="28"
+          /></span>
+          <h2>You're on the list!</h2>
+          <p class="dialog__text">
+            Thanks! We'll email <strong data-success-email></strong> as soon as
+            CoinSafe is ready on your app.
+          </p>
+          <button
+            class="btn btn--primary btn--block"
+            type="button"
+            data-close-dialog
+          >
+            Done
+          </button>
+        </div>
       </div>
+    </dialog>
 
-      <!-- View 2: success message (hidden until the form is sent) -->
-      <div class="dialog__success" data-waitlist-success hidden tabindex="-1">
-        <span class="success-icon"><img src="assets/icons/check.svg" alt="" width="28" height="28"></span>
-        <h2>You're on the list!</h2>
-        <p class="dialog__text">Thanks! We'll email <strong data-success-email></strong> as soon as CoinSafe is ready on your app.</p>
-        <button class="btn btn--primary btn--block" type="button" data-close-dialog>Done</button>
-      </div>
-    </div>
-  </dialog>
-
-  <!-- =====================================================
+    <!-- =====================================================
        9. FOOTER
        ===================================================== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a class="logo" href="index.html">
-          <img src="assets/logo.svg" alt="" width="32" height="32">
-          <span>Coin<span class="logo-accent">Safe</span></span>
-        </a>
-        <p class="footer-tagline">Your AI money assistant, right in your chat.</p>
-      </div>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <a class="logo" href="index.html">
+            <img src="assets/logo.svg" alt="" width="32" height="32" />
+            <span>Coin<span class="logo-accent">Safe</span></span>
+          </a>
+          <p class="footer-tagline">
+            Your AI money assistant, right in your chat.
+          </p>
+        </div>
 
-      <nav aria-label="Footer">
-        <ul class="footer-links" role="list">
-          <li><a href="privacy.html">Privacy Policy</a></li>
-          <li><a href="terms.html">Terms</a></li>
-          <!-- TODO: replace with your real contact email -->
-          <li><a href="mailto:contact@example.com">contact@example.com</a></li>
-        </ul>
-      </nav>
+        <nav aria-label="Footer">
+          <ul class="footer-links" role="list">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <!-- TODO: replace with your real contact email -->
+            <li>
+              <a href="mailto:contact@example.com">contact@example.com</a>
+            </li>
+          </ul>
+        </nav>
 
-      <div class="footer-bottom">
-        <!-- script.js puts the current year inside data-year -->
-        <p>&copy; <span data-year>2026</span> CoinSafe. All rights reserved.</p>
-        <p>CoinSafe is not affiliated with Telegram, WhatsApp, Apple or Meta. CoinSafe provides general information, not financial advice.</p>
+        <div class="footer-bottom">
+          <!-- script.js puts the current year inside data-year -->
+          <p>
+            &copy; <span data-year>2026</span> CoinSafe. All rights reserved.
+          </p>
+          <p>
+            CoinSafe is not affiliated with Telegram, WhatsApp, Apple or Meta.
+            CoinSafe provides general information, not financial advice.
+          </p>
+        </div>
       </div>
-    </div>
-  </footer>
-</body>
+    </footer>
+  </body>
 </html>

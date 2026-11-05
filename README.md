@@ -14,6 +14,8 @@ coinsafe-site/
 ├── index.html      # Home page (all sections)
 ├── privacy.html    # Privacy Policy (placeholder)
 ├── terms.html      # Terms of Service (placeholder)
+├── success.html    # After a successful payment (not in the menu)
+├── canceled.html   # After a canceled payment (not in the menu)
 ├── styles.css      # Styles: design tokens, layout, dark mode, animations
 ├── script.js       # Mobile menu, waitlist form, footer year, scroll animations
 ├── images/
@@ -34,7 +36,7 @@ python3 -m http.server 8000
 
 ## Before launch: things to replace
 
-- [ ] `https://t.me/SEU_BOT_AQUI` → your bot link (3 places in `index.html`, search for `SEU_BOT_AQUI`)
+- [x] Bot link → `https://t.me/coinsafe_finance_bot`
 - [ ] `FORMSPREE_ENDPOINT` in `script.js` → your Formspree form URL
 - [x] Contact email → `golden_group11@outlook.com` (`index.html`, `privacy.html`, `terms.html`)
 - [ ] `privacy.html` and `terms.html` → real legal text (and the "Last updated" date)

@@ -236,3 +236,34 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
 
   revealElements.forEach((element) => observer.observe(element));
 }
+
+
+/* ---------------------------------------------------------
+   5. "Copy bot name" button (success.html)
+   --------------------------------------------------------- */
+document.querySelectorAll('[data-copy]').forEach((button) => {
+  const originalLabel = button.textContent.trim();
+  const status = document.querySelector('[data-copy-status]');
+  let timer = null;
+
+  button.addEventListener('click', async () => {
+    let message;
+    try {
+      await navigator.clipboard.writeText(button.dataset.copy);
+      message = 'Copied!';
+    } catch (error) {
+      // The clipboard can be blocked (e.g. page opened from a file)
+      message = "Couldn't copy";
+    }
+
+    button.textContent = message;
+    if (status) status.textContent = message === 'Copied!' ? 'Bot name copied to clipboard.' : 'Copy failed. Please type the bot name instead.';
+
+    // Put the original label back after 2 seconds
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      button.textContent = originalLabel;
+      if (status) status.textContent = '';
+    }, 2000);
+  });
+});

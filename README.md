@@ -1,11 +1,11 @@
-# CoinSafe — website
+# CoinSafe website
 
 Landing page for **CoinSafe**, an AI money assistant that lives inside messaging apps.
 Set a monthly budget, text your expenses to the bot, and get a daily summary with the
 % of your budget already used. Launching on Telegram; WhatsApp, iMessage and Messenger
 are coming soon.
 
-Built with plain **HTML, CSS and JavaScript** — no frameworks, no build step.
+Built with plain **HTML, CSS and JavaScript**. No frameworks, no build step.
 
 ## Structure
 
@@ -32,7 +32,7 @@ python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
-## Before launch — things to replace
+## Before launch: things to replace
 
 - [ ] `https://t.me/SEU_BOT_AQUI` → your bot link (3 places in `index.html`, search for `SEU_BOT_AQUI`)
 - [ ] `FORMSPREE_ENDPOINT` in `script.js` → your Formspree form URL

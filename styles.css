@@ -1,5 +1,5 @@
 /* =========================================================
-   CoinSafe — styles.css
+   CoinSafe styles.css
 
    Mobile-first: the base styles are for small screens.
    Media queries with (min-width: ...) add layout for
@@ -57,7 +57,7 @@
 }
 
 /* Dark mode: follows the user's operating system setting.
-   We only redefine the variables — every rule that uses them
+   We only redefine the variables, and every rule that uses them
    updates automatically. */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -95,7 +95,7 @@
   margin: 0;
 }
 
-/* Smooth scrolling for menu links — only if the user is OK with motion */
+/* Smooth scrolling for menu links: only if the user is OK with motion */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -691,7 +691,7 @@ ol[role="list"] {
 
 
 /* ---------------------------------------------------------
-   7. Demo — phone mockup
+   7. Demo: phone mockup
    --------------------------------------------------------- */
 .demo-inner {
   display: grid;

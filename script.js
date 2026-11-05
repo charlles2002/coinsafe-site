@@ -1,5 +1,5 @@
 /* =========================================================
-   CoinSafe — script.js
+   CoinSafe script.js
    Plain JavaScript, no libraries. Each block below is
    independent and checks that its elements exist first,
    so this same file also works on privacy.html / terms.html.
@@ -131,7 +131,7 @@ if (dialog && form) {
   // Sends the data to Formspree (or pretends to, in demo mode)
   const sendToWaitlist = async (email, apps) => {
     if (!FORMSPREE_ENDPOINT) {
-      console.info('[CoinSafe] Demo mode — nothing was sent:', { email, apps });
+      console.info('[CoinSafe] Demo mode, nothing was sent:', { email, apps });
       return new Promise((resolve) => setTimeout(resolve, 400));
     }
 
@@ -188,7 +188,7 @@ if (dialog && form) {
     }
 
     submitButton.disabled = true;
-    submitButton.textContent = 'Sending…';
+    submitButton.textContent = 'Sending...';
     formError.textContent = '';
 
     try {
@@ -216,7 +216,7 @@ document.querySelectorAll('[data-year]').forEach((element) => {
 /* ---------------------------------------------------------
    4. Reveal-on-scroll animations
    IntersectionObserver tells us when an element enters the
-   screen — much lighter than listening to every scroll event.
+   screen. It is much lighter than listening to every scroll event.
    --------------------------------------------------------- */
 const revealElements = document.querySelectorAll('.reveal');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
